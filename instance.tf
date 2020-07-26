@@ -13,5 +13,23 @@ resource "aws_instance" "myEc2" {
   tags = {
     Name = "web_server" 
   }
-  depends_on = [aws_vpc.main]
+  //depends_on = [aws_vpc.main]
+connection {
+    type = "ssh"
+    user = "ubuntu"
+    private_key = file("~/.ssh/id_rsa")
+    host = self.public_ip
+ }
+  provisioner "remote-exec" {
+     inline = [
+        "sudo apt update",
+        "sudo apt install nginx -y",
+        "sudo systemctl start nginx",
+        "systemctl enable nginx"
+   ]
+ }
+
+
+
 }
+  
