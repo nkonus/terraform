@@ -10,5 +10,17 @@ variable "ami_name"{
     description  = "this is the definition of your ami"
   } 
 
-  variable "key_name"{ } //ec2KeyPair
-  variable "user_name"{ } //ubuntu
+  variable "key_name"{ } 
+  variable "user_name"{ } 
+  variable "cidr_block" { }
+  variable "cidr_block_subnet" { }
+  variable "region" { 
+      default = "us-east-1"
+  }
+  variable "map_public_ip_on_launch"{
+      default = true
+      type    = bool
+  } 
+  variable "instance_tenancy" {
+      default = "default"
+  }

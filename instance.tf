@@ -1,7 +1,7 @@
 provider "aws" {
   profile = "default"
   version = "~> 2.70"
-  region  = "us-east-1"
+  region  = var.region//"us-east-1"
 }
 resource "aws_instance" "myEc2" {
   ami           = var.ami_name
@@ -14,7 +14,13 @@ resource "aws_instance" "myEc2" {
     Name = "web_server" 
   }
 
-  
+  locals{
+    webserver_name = "Web Server"
+  }
+
+  tags{
+    name = local.webserver_name
+  }
 
   //depends_on = [aws_vpc.main]
 connection {
